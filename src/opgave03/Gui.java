@@ -10,10 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Gui extends Application {
-    private final TextField txfIndskub = new TextField();
+    private final TextField txfIndskud = new TextField();
     private final TextField txfRente = new TextField();
     private final TextField txfRenteTilskrivning = new TextField();
-    private int counter = 0;
+    private int Resultat = 0;
+    Label lblResultat = new Label("" + Resultat);
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,11 +48,10 @@ public class Gui extends Application {
         pane.add(lblRenteTilskrivninger, 0, 3);
         Label lblFremtidigVærdi = new Label("Fremtidig Værdi:");
         pane.add(lblFremtidigVærdi, 0, 5);
-        Label lblVærdiMængde = new Label("" + counter);
-        pane.add(lblVærdiMængde, 1, 5);
+        pane.add(lblResultat, 1, 5);
 
         pane.add(txfRente, 1, 2, 2, 1);
-        pane.add(txfIndskub, 1, 1, 2, 1);
+        pane.add(txfIndskud, 1, 1, 2, 1);
         pane.add(txfRenteTilskrivning, 1, 3, 3, 1);
 
 
@@ -61,11 +61,16 @@ public class Gui extends Application {
         Button btnBeregn = new Button("Beregn");
         pane.add(btnBeregn, 1, 4);
         GridPane.setMargin(btnBeregn, new Insets(10, 10, 10, 10));
-
+        btnBeregn.setOnAction(event -> this.beregn());
 
     }
     private void beregn(){
-        double indskub = Double.parseDouble(txfIndskub.getText());
+        double indskud = Double.parseDouble(txfIndskud.getText());
+        double rente = 1 + Double.parseDouble(txfRente.getText()) / 100;
+        double RenteTilskrivning = Double.parseDouble(txfRenteTilskrivning.getText());
+        double nyVærdi = indskud * Math.pow(rente,RenteTilskrivning);
+        lblResultat.setText(String.valueOf(nyVærdi));
+
     }
 
 }
