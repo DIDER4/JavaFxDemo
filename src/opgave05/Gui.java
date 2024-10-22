@@ -17,7 +17,7 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Opgave 4 Grader");
+        stage.setTitle("Opgave 5 Navne");
         GridPane pane = new GridPane();
         this.initContent(pane);
         Scene scene = new Scene(pane);
@@ -55,7 +55,8 @@ public class Gui extends Application {
 
     }
     private void fill(){
-        resultat.setText(this.tilføj());
+        String eksisterendeNavne = resultat.getText();
+        resultat.setText(eksisterendeNavne + this.tilføj() + "\n");
     }
     private String tilføj (){
         String resultat = txfName.getText();
